@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Flores para mi amada</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #ffe6e6, #fff7cc);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    header {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      color: #d6336c;
+      margin-top: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    #wrapper {
+      position: relative;
+      padding: 80px 20px;
+      margin-top: 20px;
+    }
+    .card-container {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .card {
+      position: relative;
+      width: 250px;
+      height: 350px;
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    .card img {
+      width: 100%;
+      height: 65%;
+      object-fit: cover;
+    }
+    .card .message {
+      position: absolute;
+      bottom: 0;
+      background: rgba(255,255,255,0.95);
+      width: 100%;
+      padding: 15px;
+      box-sizing: border-box;
+      font-size: 16px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .card.show-message .message {
+      opacity: 1;
+    }
+    .flower {
+      position: absolute;
+      font-size: 2.5rem;
+      pointer-events: none;
+      animation: float 5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    footer {
+      margin: 40px 0 20px;
+      font-size: 18px;
+      color: #333;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>Para Ti, Mi Amor</header>
+  <div id="wrapper">
+    <div class="card-container">
+      <div class="card" data-message="Tu sonrisa ilumina mi vida, cada verso refleja nuestro amor.">
+        <img src="img1.jpg" alt="Foto 1">
+        <div class="message">Mensaje 1</div>
+      </div>
+      <div class="card" data-message="Cada instante contigo es un poema, un suspiro eterno de felicidad.">
+        <img src="img2.jpg" alt="Foto 2">
+        <div class="message">Mensaje 2</div>
+      </div>
+      <div class="card" data-message="Eres mi musa, mi inspiración y la razón de mis más dulces sueños.">
+        <img src="img3.jpg" alt="Foto 3">
+        <div class="message">Mensaje 3</div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    te amo Bere Cruz :3, gracias por este año como pareja siempre tuyo Fernando Ramirez
+  </footer>
+  <script>
+    // Al hacer clic en cada tarjeta se muestra u oculta el mensaje
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('show-message');
+        const messageDiv = card.querySelector('.message');
+        messageDiv.textContent = card.getAttribute('data-message');
+      });
+    });
+
+    // Función para crear flores amarillas alrededor del contenedor de tarjetas
+    function createFlowers() {
+      const wrapper = document.getElementById('wrapper');
+      const rect = wrapper.getBoundingClientRect();
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const radius = Math.max(rect.width, rect.height) / 2 + 50;
+      const numFlowers = 16; // Número de flores a generar
+
+      for (let i = 0; i < numFlowers; i++) {
+        const angle = (2 * Math.PI / numFlowers) * i;
+        const flower = document.createElement('div');
+        flower.className = 'flower';
+        flower.textContent = '🌼'; // Flor amarilla
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+        flower.style.left = x + 'px';
+        flower.style.top = y + 'px';
+        flower.style.animationDelay = (Math.random() * 2) + 's';
+        wrapper.appendChild(flower);
+      }
+    }
+    window.addEventListener('DOMContentLoaded', createFlowers);
+  </script>
+</body>
+</html>
